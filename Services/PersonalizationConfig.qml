@@ -102,7 +102,8 @@ Singleton {
         "gtk3",
         "gtk4",
         "tmux",
-        "starship"
+        "starship",
+        "zsh_syntax"
     ]
 
     readonly property var keystoneStyles: [
@@ -183,7 +184,8 @@ Singleton {
         "gtk3": true,
         "gtk4": true,
         "tmux": true,
-        "starship": true
+        "starship": true,
+        "zsh_syntax": true
     })
     property string themeMode: "dark"
     property string cursorTheme: ""

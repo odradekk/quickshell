@@ -77,6 +77,11 @@ StyledFlickable {
             "id": "starship",
             "title": "Starship",
             "icon": "terminal"
+        }),
+        ({
+            "id": "zsh_syntax",
+            "title": "Zsh syntax",
+            "icon": "code"
         })
     ]
 

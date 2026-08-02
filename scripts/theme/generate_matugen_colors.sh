@@ -90,6 +90,7 @@ all_external_templates=(
     gtk4
     tmux
     starship
+    zsh_syntax
 )
 
 selected_templates=(quickshell)
@@ -99,7 +100,7 @@ elif [[ -n "$templates_csv" ]]; then
     IFS=',' read -r -a requested_templates <<< "$templates_csv"
     for template_id in "${requested_templates[@]}"; do
         case "$template_id" in
-            btop|cava|kitty|fcitx5|fcitx5_panel_svg|fcitx5_highlight_svg|niri|yazi|zsh_prompt|helix|nvim|gtk3|gtk4|tmux|starship)
+            btop|cava|kitty|fcitx5|fcitx5_panel_svg|fcitx5_highlight_svg|niri|yazi|zsh_prompt|helix|nvim|gtk3|gtk4|tmux|starship|zsh_syntax)
                 ;;
             *)
                 printf 'Unknown matugen template: %s\n' "$template_id" >&2
@@ -138,6 +139,7 @@ template_file() {
         gtk4) printf '%s\n' "gtk4.css" ;;
         tmux) printf '%s\n' "tmux-ui.conf" ;;
         starship) printf '%s\n' "starship.toml" ;;
+        zsh_syntax) printf '%s\n' "zsh-syntax.zsh" ;;
     esac
 }
 

@@ -85,3 +85,7 @@ post_hook = "sed -i 's/#[0-9A-F]\\{6\\}/\\L&/g' \"$HOME/.tmux/conf.d/03-ui.conf\
 [templates.starship]
 input_path = "templates/starship.toml"
 output_path = "~/.config/starship.toml"
+
+[templates.zsh_syntax]
+input_path = "templates/zsh-syntax.zsh"
+output_path = "~/.cache/quickshell-dev-colorscheme/zsh-syntax-colors.zsh"
