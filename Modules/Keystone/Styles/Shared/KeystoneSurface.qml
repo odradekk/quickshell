@@ -382,7 +382,7 @@ Variants {
                         : recordingBangsW) :
                     audioGeometryActive ? audioW :
                     isToolsMode ? toolsW :
-                    isHubMode ? hub.implicitWidth : 
+                    isHubMode ? hubLoader.implicitWidth : 
                     isLyricsMode ? lyricsW : 
                     expanded ? expandedW : 
                     isVolumeMode ? volW : 
@@ -393,7 +393,7 @@ Variants {
                     ? collapsedH :
                         audioGeometryActive ? audioH :
                         isToolsMode ? toolsH : 
-                        isHubMode ? hub.implicitHeight : 
+                        isHubMode ? hubLoader.implicitHeight : 
                         isLyricsMode ? lyricsH : 
                         expanded ? expandedH : 
                         isVolumeMode ? volH : 
@@ -1127,31 +1127,30 @@ Variants {
                         }
                     }
                         
-                    HubContent {
-                        id: hub
+                    // Instantiate the hub on demand: its four pages keep timers and
+                    // animations running when merely invisible, which costs ~18% of a
+                    // CPU core while the keystone is collapsed.
+                    Loader {
+                        id: hubLoader
+                        active: root.isHubMode
+                        asynchronous: true
                         anchors.top: parent.top
                         anchors.horizontalCenter: parent.horizontalCenter
-                        width: implicitWidth
-                        height: implicitHeight
+                        width: item ? item.implicitWidth : 0
+                        height: item ? item.implicitHeight : 0
+                        sourceComponent: HubContent {
+                            id: hub
                         
-                        player: root.currentPlayer
-                        screen: keystoneWindow.screen
-                        currentIndex: root.hubTabIndex
-                        onCurrentIndexChanged: root.hubTabIndex = currentIndex
-                        onCloseRequested: root.showHub = false
-                        onAvatarEditRequested: {
-                            root.showHub = false
-                            styleSurface.avatarEditRequested(keystoneWindow.screen)
-                        }
-
-                        opacity: root.isHubMode ? 1 : 0
-                        visible: opacity > 0.01
-                        Behavior on opacity {
-                            NumberAnimation {
-                                duration: Appearance.animation.expressiveEffects.duration
-                                easing.type: Appearance.animation.expressiveEffects.type
-                                easing.bezierCurve: Appearance.animation.expressiveEffects.bezierCurve
+                            player: root.currentPlayer
+                            screen: keystoneWindow.screen
+                            currentIndex: root.hubTabIndex
+                            onCurrentIndexChanged: root.hubTabIndex = currentIndex
+                            onCloseRequested: root.showHub = false
+                            onAvatarEditRequested: {
+                                root.showHub = false
+                                styleSurface.avatarEditRequested(keystoneWindow.screen)
                             }
+
                         }
                     }
 
