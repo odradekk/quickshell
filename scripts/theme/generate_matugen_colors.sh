@@ -191,7 +191,10 @@ awk -v enabled="$enabled_sections" -v matugen_dir="$matugen_dir" '
     /^\[config\]$/ {
         emit = 1
     }
-    /^\[[^]]+\]$/ && $0 !~ /^\[templates\./ && $0 !~ /^\[config\]$/ {
+    /^\[config\./ {
+        emit = 1
+    }
+    /^\[[^]]+\]$/ && $0 !~ /^\[templates\./ && $0 !~ /^\[config\]$/ && $0 !~ /^\[config\./ {
         emit = 0
     }
     emit {
