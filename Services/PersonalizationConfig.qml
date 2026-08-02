@@ -96,7 +96,13 @@ Singleton {
         "fcitx5_highlight_svg",
         "niri",
         "yazi",
-        "zsh_prompt"
+        "zsh_prompt",
+        "helix",
+        "nvim",
+        "gtk3",
+        "gtk4",
+        "tmux",
+        "starship"
     ]
 
     readonly property var keystoneStyles: [
@@ -171,7 +177,13 @@ Singleton {
         "fcitx5_highlight_svg": true,
         "niri": true,
         "yazi": true,
-        "zsh_prompt": true
+        "zsh_prompt": true,
+        "helix": true,
+        "nvim": true,
+        "gtk3": true,
+        "gtk4": true,
+        "tmux": true,
+        "starship": true
     })
     property string themeMode: "dark"
     property string cursorTheme: ""

@@ -47,6 +47,36 @@ StyledFlickable {
             "id": "zsh_prompt",
             "title": "Zsh prompt",
             "icon": "code"
+        }),
+        ({
+            "id": "helix",
+            "title": "Helix",
+            "icon": "edit_note"
+        }),
+        ({
+            "id": "nvim",
+            "title": "Neovim",
+            "icon": "code_blocks"
+        }),
+        ({
+            "id": "gtk3",
+            "title": "GTK 3",
+            "icon": "widgets"
+        }),
+        ({
+            "id": "gtk4",
+            "title": "GTK 4",
+            "icon": "widgets"
+        }),
+        ({
+            "id": "tmux",
+            "title": "tmux",
+            "icon": "dashboard"
+        }),
+        ({
+            "id": "starship",
+            "title": "Starship",
+            "icon": "terminal"
         })
     ]
 

@@ -3,6 +3,17 @@
 layout {
     focus-ring {
         active-gradient from="{{colors.primary.default.hex}}cc" to="{{colors.tertiary.default.hex}}cc" angle=135
+        inactive-color "{{colors.outline.default.hex}}"
+        urgent-color "{{colors.error.default.hex}}"
+    }
+
+    // Border is the visible focus indicator when focus-ring is disabled.
+    // active-color is intentionally a solid color here: the focus-ring block
+    // above already carries the gradient, and setting both a gradient and a
+    // solid color on the same block has undefined precedence.
+    border {
+        active-color "{{colors.primary.default.hex}}"
+        inactive-color "{{colors.outline.default.hex}}"
         urgent-color "{{colors.error.default.hex}}"
     }
 }

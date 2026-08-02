@@ -1,6 +1,21 @@
 [config]
 version_check = false
 
+# Glass syntax hues. Material 3 only yields ~4 distinguishable hue families,
+# which is not enough for source-code highlighting: secondary_fixed_dim is
+# identical to secondary in dark mode, and on_*_fixed_variant is unreadable on
+# a dark surface. These eight custom colors keep their hue identity while
+# blend = true harmonizes them toward the wallpaper's source color.
+[config.custom_colors]
+glass_accent = { color = "#F8C3CD", blend = true }  # 退紅
+glass_accent2 = { color = "#B28FCE", blend = true }  # 薄
+glass_danger = { color = "#D0104C", blend = true }  # 韓紅
+glass_info = { color = "#7DB9DE", blend = true }  # 勿忘草
+glass_warning = { color = "#BEC23F", blend = true }  # 鶸
+glass_success = { color = "#91B493", blend = true }  # 薄青
+glass_cyan = { color = "#66BAB7", blend = true }  # 水浅葱
+glass_amber = { color = "#E79460", blend = true }  # 洗柿
+
 [templates.quickshell]
 input_path = "templates/quickshell-colors.json"
 output_path = "~/.cache/quickshell-dev-colorscheme/colors.json"
@@ -45,3 +60,28 @@ output_path = "~/.local/share/fcitx5/themes/Matugen/panel.svg"
 [templates.fcitx5_highlight_svg]
 input_path = "templates/fcitx5-highlight.svg"
 output_path = "~/.local/share/fcitx5/themes/Matugen/highlight.svg"
+
+[templates.helix]
+input_path = "templates/helix-theme.toml"
+output_path = "~/.config/helix/themes/matugen.toml"
+
+[templates.nvim]
+input_path = "templates/nvim-colors.lua"
+output_path = "~/.config/nvim/colors/matugen.lua"
+
+[templates.gtk3]
+input_path = "templates/gtk3.css"
+output_path = "~/.config/gtk-3.0/gtk.css"
+
+[templates.gtk4]
+input_path = "templates/gtk4.css"
+output_path = "~/.config/gtk-4.0/gtk.css"
+
+[templates.tmux]
+input_path = "templates/tmux-ui.conf"
+output_path = "~/.tmux/conf.d/03-ui.conf"
+post_hook = "sed -i 's/#[0-9A-F]\\{6\\}/\\L&/g' \"$HOME/.tmux/conf.d/03-ui.conf\"; tmux source-file \"$HOME/.tmux.conf\" >/dev/null 2>&1 || true"
+
+[templates.starship]
+input_path = "templates/starship.toml"
+output_path = "~/.config/starship.toml"

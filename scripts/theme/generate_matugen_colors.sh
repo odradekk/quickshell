@@ -84,6 +84,12 @@ all_external_templates=(
     niri
     yazi
     zsh_prompt
+    helix
+    nvim
+    gtk3
+    gtk4
+    tmux
+    starship
 )
 
 selected_templates=(quickshell)
@@ -93,7 +99,7 @@ elif [[ -n "$templates_csv" ]]; then
     IFS=',' read -r -a requested_templates <<< "$templates_csv"
     for template_id in "${requested_templates[@]}"; do
         case "$template_id" in
-            btop|cava|kitty|fcitx5|fcitx5_panel_svg|fcitx5_highlight_svg|niri|yazi|zsh_prompt)
+            btop|cava|kitty|fcitx5|fcitx5_panel_svg|fcitx5_highlight_svg|niri|yazi|zsh_prompt|helix|nvim|gtk3|gtk4|tmux|starship)
                 ;;
             *)
                 printf 'Unknown matugen template: %s\n' "$template_id" >&2
@@ -126,6 +132,12 @@ template_file() {
         niri) printf '%s\n' "niri-colors.kdl" ;;
         yazi) printf '%s\n' "yazi-theme.toml" ;;
         zsh_prompt) printf '%s\n' "zsh-prompt-colors.zsh" ;;
+        helix) printf '%s\n' "helix-theme.toml" ;;
+        nvim) printf '%s\n' "nvim-colors.lua" ;;
+        gtk3) printf '%s\n' "gtk3.css" ;;
+        gtk4) printf '%s\n' "gtk4.css" ;;
+        tmux) printf '%s\n' "tmux-ui.conf" ;;
+        starship) printf '%s\n' "starship.toml" ;;
     esac
 }
 
@@ -149,6 +161,11 @@ for template_id in "${selected_templates[@]}"; do
             ;;
         niri) mkdir -p "$HOME/.config/niri" ;;
         yazi) mkdir -p "$HOME/.config/yazi" ;;
+        helix) mkdir -p "$HOME/.config/helix/themes" ;;
+        nvim) mkdir -p "$HOME/.config/nvim/colors" ;;
+        gtk3) mkdir -p "$HOME/.config/gtk-3.0" ;;
+        gtk4) mkdir -p "$HOME/.config/gtk-4.0" ;;
+        tmux) mkdir -p "$HOME/.tmux/conf.d" ;;
     esac
 done
 
