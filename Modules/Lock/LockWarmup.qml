@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
+import qs.Common
 import qs.Services
 
 Variants {
@@ -70,14 +71,29 @@ Variants {
             }, captureSize());
         }
 
+        // Use the wallpaper as the lock backdrop instead of a live screencopy.
+        //
+        // The screencopy path is unsafe here: on Intel Xe2 the dmabuf import of
+        // a 2880x1800 frame can outlast the 120 ms snapshotTimeout, and the
+        // timeout handler clears captureSource while the capture is still in
+        // flight. That segfaults the Wayland client *before* the session lock
+        // is committed, so the compositor never locks and the session is left
+        // silently unlocked -- observed once in four attempts.
+        //
+        // Reporting a URL synchronously keeps the LockSnapshot pending-count
+        // protocol intact, so the lock always engages.
         function startSnapshot(snapshotGeneration) {
-            warmupCapture.captureSource = null;
             activeGeneration = snapshotGeneration;
-            waitingForFrame = true;
+            waitingForFrame = false;
             grabInProgress = false;
             grabTimer.stop();
-            snapshotTimeout.restart();
-            recaptureTimer.restart();
+            snapshotTimeout.stop();
+            recaptureTimer.stop();
+
+            const wallpaper = WallpaperService.currentWallpaper || "";
+            const url = (wallpaper !== "" && !wallpaper.startsWith("#"))
+                ? Paths.fileUrl(wallpaper) : "";
+            LockSnapshot.setSnapshot(modelData.name || "", url, null, snapshotGeneration);
         }
 
         Connections {
