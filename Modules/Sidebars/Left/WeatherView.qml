@@ -435,9 +435,19 @@ Item {
 
                 Item {
                     width: parent.width
-                    height: Math.max(220, flick.height - 452 - 286 - contentColumn.spacing * 2)
+
+                    // The hero block is centred, so anything taller than this
+                    // Item spills out of it on both sides and the daily card
+                    // below, which is positioned from this height, paints over
+                    // the spill. Floor the height at the block's own implicit
+                    // height rather than a fixed 220 so the overlap cannot
+                    // happen; the surrounding Flickable takes over scrolling
+                    // once the three sections no longer fit.
+                    height: Math.max(heroBlock.implicitHeight,
+                                     flick.height - 452 - 286 - contentColumn.spacing * 2)
 
                     Column {
+                        id: heroBlock
                         anchors.left: parent.left
                         anchors.right: parent.right
                         anchors.verticalCenter: parent.verticalCenter

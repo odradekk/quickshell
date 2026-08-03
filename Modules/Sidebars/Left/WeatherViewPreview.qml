@@ -271,9 +271,15 @@ Item {
 
                 Item {
                     width: parent.width
-                    height: Math.max(220, flick.height - 452 - 286 - contentColumn.spacing * 2)
+
+                    // Mirrors the floor used in WeatherView: a fixed 220 lets
+                    // the centred block overflow and be covered by the daily
+                    // card below it.
+                    height: Math.max(heroBlock.implicitHeight,
+                                     flick.height - 452 - 286 - contentColumn.spacing * 2)
 
                     Column {
+                        id: heroBlock
                         anchors.left: parent.left
                         anchors.right: parent.right
                         anchors.verticalCenter: parent.verticalCenter
