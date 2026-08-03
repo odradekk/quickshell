@@ -272,9 +272,9 @@ Item {
                 Item {
                     width: parent.width
 
-                    // Mirrors the floor used in WeatherView: a fixed 220 lets
-                    // the centred block overflow and be covered by the daily
-                    // card below it.
+                    // Same floor as WeatherView: the block's own implicit
+                    // height. A fixed floor lets the centred block overflow
+                    // this Item and be covered by the daily card below.
                     height: Math.max(heroBlock.implicitHeight,
                                      flick.height - 452 - 286 - contentColumn.spacing * 2)
 
