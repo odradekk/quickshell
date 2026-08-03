@@ -13,7 +13,16 @@ MaterialRippleButton {
     property bool forceIconColumn: false
     property bool forceSpecialInteractionColumn: false
     readonly property bool isSeparator: root.menuEntry.isSeparator === true
-    readonly property string entryIcon: root.menuEntry.icon || ""
+    // QsMenuEntry.icon is a bare theme icon name such as "view-refresh",
+    // unlike SystemTrayItem.icon which Quickshell has already resolved to a
+    // URL. Handing the bare name to IconImage makes Qt read it as a relative
+    // path, so every menu entry that carries an icon draws the missing-image
+    // placeholder instead. Quickshell.iconPath is the same conversion the
+    // notification and launcher icons already go through.
+    readonly property string entryIconName: root.menuEntry.icon || ""
+    readonly property string entryIcon: root.entryIconName.length > 0
+        ? Quickshell.iconPath(root.entryIconName)
+        : ""
     readonly property bool hasIcon: entryIcon.length > 0
     readonly property int entryButtonType: root.menuEntry.buttonType === undefined ? QsMenuButtonType.None : root.menuEntry.buttonType
     readonly property bool hasSpecialInteraction: entryButtonType !== QsMenuButtonType.None
